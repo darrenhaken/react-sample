@@ -2,8 +2,16 @@
   "name": "metrics-triage-react",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "build": "react-scripts-ts build",
+    "eject": "react-scripts-ts eject",
+    "lint": "npm run lint:ts && npm run lint:sass",
+    "lint:ts": "tslint './src/**/*.ts*' --format=stylish --force",
+    "lint:sass": "stylelint ./src/**/*.scss",
+    "start": "webpack-dev-server",
+    "test": "jest --watch --coverage"
+  },
   "dependencies": {
-    "@types/jest": "^19.2.3",
     "@types/node": "^7.0.18",
     "@types/react": "^15.0.24",
     "@types/react-dom": "^15.5.0",
@@ -19,20 +27,55 @@
   },
   "devDependencies": {
     "@types/enzyme": "^2.8.0",
-    "@types/mocha": "^2.2.41",
+    "@types/jest": "^19.2.3",
+    "@types/react-hot-loader": "^3.0.1",
+    "awesome-typescript-loader": "^3.1.3",
+    "babel-core": "^6.24.1",
+    "babel-jest": "^20.0.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-react-app": "^2.2.0",
+    "css-loader": "^0.28.1",
     "enzyme": "^2.8.2",
+    "file-loader": "^0.11.1",
+    "image-webpack-loader": "^3.3.1",
+    "postcss-loader": "^2.0.5",
     "react-addons-test-utils": "^15.5.1",
+    "react-hot-loader": "^3.0.0-beta.7",
     "react-scripts-ts": "1.3.0",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.17.0",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-webpack-plugin": "^0.7.0",
     "ts-node": "^3.0.4",
     "tslint": "^5.2.0",
     "typescript": "^2.3.2",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
   },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/config/jest/jest.preprocessor.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "testRegex": "/__tests__/.*\\.(ts|tsx)$",
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy",
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/fileMock.js"
+    },
+    "globals": {
+      "DEVELOPMENT": false,
+      "FAKE_SERVER": false
+    }
   }
 }

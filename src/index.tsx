@@ -1,21 +1,30 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
+import {AppContainer} from 'react-hot-loader';
+import App from './components/App';
+import {render} from 'react-dom';
 
-import { createStore } from 'redux';
-import { enthusiasm } from './reducers/index';
-import { StoreState } from './types/index';
-import Hello from './containers/Hello';
-import { Provider } from 'react-redux';
+const rootElement = document.getElementById('root');
 
-const store = createStore<StoreState>(enthusiasm, {
-    enthusiasmLevel: 1,
-    languageName: 'TypeScript',
-});
-
-ReactDOM.render(
-    <Provider store={store}>
-        <Hello />
-    </Provider>,
-    document.getElementById('root') as HTMLElement
+render(
+    <AppContainer>
+        <App/>
+    </AppContainer>,
+    rootElement
 );
+
+// // Hot Module Replacement API
+// declare let module: {hot: any};
+//
+// if (module.hot) {
+//     module.hot.accept('./components/App', () => {
+//         const NewApp = require('./components/App').default;
+//
+//         render(
+//             <AppContainer>
+//                 <NewApp/>
+//             </AppContainer>,
+//             rootElement
+//         );
+//     });
+// }
